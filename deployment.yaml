@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: casestudydemo-deployment
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: casestudydemo
+  template:
+    metadata:
+      labels:
+        app: casestudydemo
+    spec:
+      containers:
+        - name: casestudydemo
+          image: charithasree37/casestudy:casestudyimage1
+          ports:
+            - containerPort: 5000

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Attendance Tracker</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #81ecec, #74b9ff);
+            text-align: center;
+            padding-top: 70px;
+        }
+        .card {
+            background: white;
+            width: 500px;
+            margin: auto;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        h1 {
+            color: #2d3436;
+        }
+        label {
+            display: block;
+            margin: 10px;
+            text-align: left;
+            margin-left: 70px;
+        }
+        input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        button {
+            background-color: #0984e3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0652DD;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>🎓 Student Attendance Tracker</h1>
+        <p>Select students who are present today:</p>
+        <form action="/attendance" method="POST">
+            {% for s in students %}
+                <label><input type="checkbox" name="present" value="{{ s }}"> {{ s }}</label>
+            {% endfor %}
+            <br>
+            <button type="submit">Submit Attendance ✅</button>
+        </form>
+    </div>
+</body>
+</html>

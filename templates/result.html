@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Attendance Report</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #a29bfe, #6c5ce7);
+            color: #2d3436;
+            text-align: center;
+            padding-top: 70px;
+        }
+        .card {
+            background: white;
+            width: 500px;
+            margin: auto;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            margin: 5px 0;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #0984e3;
+            font-weight: bold;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>📋 Attendance Report</h1>
+        <p><b>Total Students:</b> {{ total }}</p>
+        <p><b>Present:</b> {{ present }}</p>
+        <p><b>Absent:</b> {{ absent }}</p>
+        <hr>
+        <h3>✅ Present Students</h3>
+        <ul>
+            {% for s in present_students %}
+                <li>{{ s }}</li>
+            {% endfor %}
+        </ul>
+        <a href="/">🔁 Mark Again</a>
+    </div>
+</body>
+</html>

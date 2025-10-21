@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__)
 
@@ -11,6 +11,7 @@ def home():
 
 @app.route('/attendance', methods=['POST'])
 def attendance():
+    # 'present' checkboxes -> multiple values
     present_students = request.form.getlist('present')
     total = len(students)
     present_count = len(present_students)
@@ -24,5 +25,5 @@ def attendance():
                            absent=absent_count)
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=5000)
-
+    # debug=False for production; change to True when developing locally
+    app.run(host="0.0.0.0", port=5000, debug=True)

@@ -1,4 +1,4 @@
-apiVersion: apps/casestudyimage1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: casestudydemo-deployment
@@ -17,4 +17,5 @@ spec:
           image: charithasree37/casestudy:casestudyimage1
           ports:
             - containerPort: 5000
+
 

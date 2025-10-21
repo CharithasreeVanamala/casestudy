@@ -1,47 +1,38 @@
-pipeline {
+pipeline{
     agent any
-
-    environment {
-        IMAGE_NAME = 'charithasree37/casestudy'
-        IMAGE_TAG  = 'casestudyimage1'
-    }
-
-    stages {
-        stage('Build Docker Image') {
-            steps {
-                echo "Building Docker image..."
-                // For Windows agents use 'bat'. For Linux use 'sh'. Adjust if necessary.
-                bat "docker build -t charitha37/casestudy:casestudyimage1 ."
+    stages
+    {
+        stage('Build Docker Image'){
+            steps{
+                echo "Build Docker Image"
+                bat "docker build -t casestudydemo:casestudyimage1 ."
             }
         }
-
-        stage('Docker Login & Push') {
-            steps {
-                // Use Jenkins credentials (create a username/password credential with id 'dockerhub-creds')
-                withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'charithasree37', passwordVariable: 'Krishna@09')]) {
-                    bat "docker login -u charithasree37 -p Krishna@09"
-                    bat "docker push charithasree37/casestudy:casestudyimage1"
-                }
+        stage('Docker Login'){
+            steps{
+                bat 'docker login -u charithasree37 -p Krishna@09'
             }
         }
-
-        stage('Deploy to Kubernetes') {
-            steps {
-                echo "Applying Kubernetes manifests..."
-                // If kubectl is available on the agent
+        stage('push Docker Image to Docker Hub'){
+            steps{
+                echo "push Docker Image to Docker Hub"
+                bat "docker tag casestudydemo:casestudyimage1 charithasree37/casestudydemo:casestudyimage1"
+                bat "docker push charithasree37/casestudydemo:casestudyimage1"
+            }
+        }
+        steps('Deploy to Kubernetes'){
+            steps{
                 bat 'kubectl apply -f deployment.yaml --validate=false'
                 bat 'kubectl apply -f service.yaml'
             }
         }
     }
-
     post {
         success {
-            echo 'Pipeline completed successfully.'
+            echo 'Successful'
         }
         failure {
-            echo 'Pipeline failed.'
+            echo 'Unsuccessful'
         }
     }
 }
-

@@ -20,7 +20,7 @@ pipeline{
                 bat "docker push charithasree37/casestudydemo:casestudyimage1"
             }
         }
-        steps('Deploy to Kubernetes'){
+        stage('Deploy to Kubernetes'){
             steps{
                 bat 'kubectl apply -f deployment.yaml --validate=false'
                 bat 'kubectl apply -f service.yaml'
@@ -36,3 +36,4 @@ pipeline{
         }
     }
 }
+

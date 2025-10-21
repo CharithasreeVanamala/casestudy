@@ -4,7 +4,7 @@ pipeline{
     {
         stage('Build Docker Image'){
             steps{
-                echo "Build Docker Image"
+                echo "Build Docker Image for Attendence Tracker App"
                 bat "docker build -t casestudydemo:casestudyimage1 ."
             }
         }
@@ -37,4 +37,5 @@ pipeline{
     }
 
 }
+
 
